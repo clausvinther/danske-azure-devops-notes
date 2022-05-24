@@ -8,7 +8,7 @@ working area         			staging area           	commit area
 newfile - untracked by git       git add                    git commit - under local git repo
 
 
-
+dfgdfgdfg
 
 
 ----------------------------------------------------------
