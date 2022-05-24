@@ -46,13 +46,13 @@ git push -u origin --all
 # create  pipeline (delete azure-pipeline.yml first if already exists)
 
 # pipeline 1  
-pipeline -> create pipeline -> select "azure repo git" option -> select repo name "danske-pythonwebapp" -> Configure your pipeline -> python package 
+pipeline -> create pipeline -> select "azure repo git" option -> select repo name "danske-pythonwebapp-github-project" -> Configure your pipeline -> python package 
 # keep only python 3.7 and delete pytest
 -> save and run
 #rename to build-piepeline
 
 #pipeline 2 (make sure you have created web app with python runtime)
-pipeline -> create pipeline -> select "azure repo git" option -> select repo name "danske-pythonwebapp" -> Configure your pipeline -> python to linux web app on azure -> select subscription and web app -> save and run
+pipeline -> create pipeline -> select "azure repo git" option -> select repo name "danske-pythonwebapp-github-project" -> Configure your pipeline -> python to linux web app on azure -> select subscription and web app -> save and run
 
 
 # verify web app is deployed.
