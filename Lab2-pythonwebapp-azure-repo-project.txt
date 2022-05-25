@@ -1,10 +1,10 @@
 # Lab 2 : Azure repo - setup Azure DevOps pipeline using azure repo
 
-https://github.com/puneetbhatia77/pythonwebapp
+https://github.com/clausvinther/pythonwebapp
 mkdir lab2
 cd lab2
 
-PS C:\azure-devops\lab2>git clone https://github.com/puneetbhatia77/pythonwebapp
+PS C:\azure-devops\lab2>git clone https://github.com/clausvinther/pythonwebapp
 PS C:\azure-devops\lab2>cd pythonwebapp             # delete all .git folders
 PS C:\azure-devops\lab2\pythonwebapp> py -m venv venv
 PS C:\azure-devops\lab2\pythonwebapp> .\venv\Scripts\Activate.ps1
@@ -19,13 +19,13 @@ PS C:\azure-devops\lab2\pythonwebapp> .\venv\Scripts\Activate.ps1
 
 az group create --name pythonwebapp2 --location westus
 az appservice plan create --resource-group pythonwebapp2 --name pythonwebappplan2 --is-linux --sku B1
-az webapp create --resource-group pythonwebapp2 --plan pythonwebappplan2 --name pythonwebapppuneet2 --runtime "Python|3.7"
+az webapp create --resource-group pythonwebapp2 --plan pythonwebappplan2 --name pythonwebappclvi2 --runtime "Python|3.7"
 
 # Create the Azure DevOps Project "danske-pythonwebapp-azure-repo-project" and connect to the App service instance
 # goto repos -> Push an existing repository from command line and copy git remote origin commands in notepad
 
    # for example
-   git remote add origin https://puneetbhatia77@dev.azure.com/puneetbhatia77/danske-pythonwebapp-azure-repo-project/_git/danske-pythonwebapp-azure-repo-project
+   git remote add origin https://clausvinther@dev.azure.com/clausvinther/danske-pythonwebapp-azure-repo-project/_git/danske-pythonwebapp-azure-repo-project
    git push -u origin --all
 
 change "Azure Webapps" with "Danske" and "A Simple Pyton Web App" with "A Simple Pyton Web App - Azure repo" in templates\index.html 
@@ -33,7 +33,7 @@ git init
 git add
 git commit 
 
-git remote add origin https://puneetbhatia77@dev.azure.com/puneetbhatia77/danske-pythonwebapp-azure-repo-project/_git/danske-pythonwebapp-azure-repo-project
+git remote add origin https://clausvinther@dev.azure.com/clausvinther/danske-pythonwebapp-azure-repo-project/_git/danske-pythonwebapp-azure-repo-project
 git push -u origin --all
 
 # refresh azure repo
