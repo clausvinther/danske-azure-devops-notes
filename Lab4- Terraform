@@ -1,0 +1,23 @@
+https://learn.hashicorp.com/tutorials/terraform/infrastructure-as-code?in=terraform/azure-get-started
+https://learn.hashicorp.com/tutorials/terraform/azure-build?in=terraform/azure-get-started
+https://learn.hashicorp.com/tutorials/terraform/azure-build?in=terraform/azure-get-started
+
+# this will create Azure resource group
+call az group create --location westus --name $(terraformstoragerg)
+call az storage account create --name $(terraformstorageaccount) --resource-group $(terraformstoragerg) --location westus --sku Standard_LRS
+call az storage container create --name terraform --account-name $(terraformstorageaccount)
+call az storage account keys list -g $(terraformstoragerg) -n $(terraformstorageaccount)
+
+# Using this script, we will fetch storage key which is required in terraform file to authenticate backend storage account
+$key=(Get-AzureRmStorageAccountKey -ResourceGroupName $(terraformstoragerg) -AccountName $(terraformstorageaccount)).Value[0]
+Write-Host "##vso[task.setvariable variable=storagekey]$key"
+$(appservicename)
+Task 1 - Azure CLI 
+
+changed powershell -> batch option
+
+Task 2 - Azure powershell task to store key
+
+  change task version from 5 to 3
+  
+  https://learn.hashicorp.com/tutorials/terraform/aws-build?in=terraform/aws-get-started
