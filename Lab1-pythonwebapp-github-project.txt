@@ -1,8 +1,8 @@
 # Lab 1 : Azure repo - setup Azure DevOps pipeline using github
 
-https://github.com/puneetbhatia77/pythonwebapp
+https://github.com/clausvinther/pythonwebapp
 
-PS C:\azure-devops>git clone https://github.com/puneetbhatia77/pythonwebapp
+PS C:\azure-devops>git clone https://github.com/clausvinther/pythonwebapp
 PS C:\azure-devops>cd pythonwebapp             # delete all .git folders
 PS C:\azure-devops\pythonwebapp> py -m venv venv
 PS C:\azure-devops\pythonwebapp> .\venv\Scripts\Activate.ps1
@@ -26,7 +26,7 @@ git push
 
 az group create --name pythonwebapp --location westus
 az appservice plan create --resource-group pythonwebapp --name pythonwebappplan --is-linux --sku B1
-az webapp create --resource-group pythonwebapp --plan pythonwebappplan --name pythonwebapppuneet --runtime "Python|3.7"
+az webapp create --resource-group pythonwebapp --plan pythonwebappplan --name pythonwebappclausvinther --runtime "Python|3.7"
 
 
 # Create the Azure DevOps Project "danske-pythonwebapp-github-project" and connect to the App service instance
