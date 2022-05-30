@@ -1,0 +1,54 @@
+number=$RANDOM
+RGNAME=aksdemoRG$number
+LOCATION='eastus'
+AKSNAME='akscluster'$number
+SQLNAME='sqlserver'$number
+ACRNAME='acr'$number
+
+VERSION=$(az aks get-versions --location $LOCATION --query 'orchestrators[-1].orchestratorVersion' --output tsv); echo $VERSION
+
+az group create --name $RGNAME --location $LOCATION
+
+az aks create --location $LOCATION --resource-group $RGNAME --name $AKSNAME --enable-addons monitoring --kubernetes-version $VERSION --generate-ssh-keys
+
+az sql server create --location $LOCATION --resource-group $RGNAME --name $SQLNAME --admin-user sqladmin --admin-password P2ssw0rd1234
+
+az sql server firewall-rule create --resource-group $RGNAME --server $SQLNAME --name allowAzure --start-ip-address 0.0.0.0 --end-ip-address 0.0.0.0
+
+az sql db create --resource-group $RGNAME --server $SQLNAME --name mhcdb --service-objective S0 --no-wait
+
+az acr create --location $LOCATION --resource-group $RGNAME --name $ACRNAME --sku Standard
+
+# Retrieve the id of the service principal configured for AKS
+CLIENT_ID=$(az aks show --resource-group $RGNAME --name $AKSNAME --query "identityProfile.kubeletidentity.clientId" --output tsv)
+
+# Retrieve the ACR registry resource id
+ACR_ID=$(az acr show --name $ACRNAME --resource-group $RGNAME --query "id" --output tsv)
+
+# Create role assignment
+az role assignment create --assignee $CLIENT_ID --role acrpull --scope $ACR_ID
+
+echo $(az sql server list --resource-group $RGNAME --query '[].name' --output tsv)'.database.windows.net'       #  sqlserver24530.database.windows.net
+
+az acr show --name $ACRNAME --resource-group $RGNAME --query "loginServer" --output tsv                         #  acr24530.azurecr.io
+
+
+Variables
+----------
+ACR - acr24530.azurecr.io
+DatabaseName - mhcdb
+SQLserver - sqlserver24530.database.windows.net
+SQLpassword - P2ssw0rd1234
+SQLuser - sqladmin
+------------------------------------------------------------------------------
+
+aksdemoRG24530
+akscluster24530
+
+az aks get-credentials --resource-group aksdemoRG24530 --name akscluster24530
+kubectl get pods
+
+kubectl get service mhc-front --watch
+
+
+kubectl scale deployment --replicas=3 mhc-front
